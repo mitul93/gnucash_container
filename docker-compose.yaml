@@ -8,14 +8,14 @@ services:
       args:
         DOCKER_BASE_IMAGE_NAME: ${DOCKER_BASE_IMAGE_NAME}
         DOCKER_BASE_IMAGE_TAG: ${DOCKER_BASE_IMAGE_TAG}
-        USERNAME: ${USERNAME}
-        USER_UID: ${USER_UID}
-        USER_GID: ${USER_GID}
+        USERNAME: ${DOCKER_USERNAME}
+        USER_UID: ${DOCKER_USER_UID}
+        USER_GID: ${DOCKER_USER_GID}
     environment:
       DISPLAY: ${DISPLAY}
       # https://unix.stackexchange.com/questions/230238/x-applications-warn-couldnt-connect-to-accessibility-bus-on-stderr
       NO_AT_BRIDGE: 1
-    user: "${USER_UID}:${USER_GID}"
+    user: "${DOCKER_USER_UID}:${DOCKER_USER_GID}"
     deploy:
       resources:
         limits:
