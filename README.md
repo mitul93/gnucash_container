@@ -50,6 +50,16 @@ make run_gnucash
 
 OR
 
+Create .env file with following fields and save it to `gnucash_docker/.env`
+```
+DOCKER_BASE_IMAGE_NAME=ubuntu
+DOCKER_BASE_IMAGE_TAG=24.04
+REPOSITORY_NAME=gnucash_docker
+USERNAME=
+USER_UID=
+USER_GID=
+```
+
 ```
 cd gnucash_docker
 mkdir -p data/config/gnucash data/share/gnucash data/gnucash_data
