@@ -1,0 +1,40 @@
+services:
+  gnu-cash:
+    build:
+      # if compose file is included, context is directory of parent compose file
+      context: .
+      # dockerfile is with respect to context directory
+      dockerfile: "./Dockerfile"
+      args:
+        DOCKER_BASE_IMAGE_NAME: ${DOCKER_BASE_IMAGE_NAME}
+        DOCKER_BASE_IMAGE_TAG: ${DOCKER_BASE_IMAGE_TAG}
+        USERNAME: ${USERNAME}
+        USER_UID: ${USER_UID}
+        USER_GID: ${USER_GID}
+    environment:
+      DISPLAY: ${DISPLAY}
+      # https://unix.stackexchange.com/questions/230238/x-applications-warn-couldnt-connect-to-accessibility-bus-on-stderr
+      NO_AT_BRIDGE: 1
+    user: "${USER_UID}:${USER_GID}"
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+          memory: 4g
+        reservations:
+          cpus: 4
+          memory: 4g
+    volumes:
+      - type: bind
+        source: /tmp/.X11-unix/
+        target: /tmp/.X11-unix/
+        read_only: true
+      - type: bind
+        source: data/gnucash_data
+        target: /home/${USERNAME}/gnucash_data
+      - type: bind
+        source: data/share/gnucash
+        target: /home/${USERNAME}/.local/share/gnucash/
+      - type: bind
+        source: data/config/gnucash
+        target: /home/${USERNAME}/.config/gnucash
