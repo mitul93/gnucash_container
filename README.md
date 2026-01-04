@@ -39,7 +39,26 @@ You can override these mappings in `docker-compose.yaml` file.
 
 More information about Application Data paths available at https://wiki.gnucash.org/wiki/Configuration_Locations#System-wide
 
-The docker container will run as local user UID:GID. Make sure you have permissions to read/write `gnucash_docker/storage` directory.
+The docker container will run as local user UID:GID with username `gnucash` . Make sure you have permissions to read/write `gnucash_docker/storage` directory.
+
+## GNU Cash storage backend
+
+GNU Cash supports **XML**, **SQLite**, **MySQL** and **PostgreSQL** as storage backend. 
+
+More information https://www.gnucash.org/docs/v5/C/gnucash-guide/basics-files1.html
+
+Linux requires additional package installtion to use SQL backends. This project configures GNU Cash with SQLite.
+
+If you want to use another storage backend, update value of `GNUCASH_STORAGE_BACKEND` variable in file `make/env.mk`
+It accepts comma separated values.
+
+Example values
+```
+GNUCASH_STORAGE_BACKEND:=SQLite
+GNUCASH_STORAGE_BACKEND:=SQLite, MySQL
+GNUCASH_STORAGE_BACKEND:=MySQL, PostgreSQL, SQLite
+```
+
 
 ## Build and run docker image
 
@@ -48,26 +67,8 @@ cd gnucash_docker
 make run_gnucash
 ```
 
-OR
+## Troubleshooting
 
-Create .env file with following fields and save it to `gnucash_docker/.env`
+Remove `.evn` file and run `make run_gnucash`
 
-`DOCKER_USER_UID` and `DOCKER_USER_GID` must have permission to read/write `gnucash_docker/storage` folder.
-
-```
-DOCKER_BASE_IMAGE_NAME=ubuntu
-DOCKER_BASE_IMAGE_TAG=24.04
-REPOSITORY_NAME=gnucash_docker
-DOCKER_USERNAME=gnucash
-DOCKER_USER_UID=
-DOCKER_USER_GID=
-```
-
-```
-cd gnucash_docker
-mkdir -p storage/config storage/share storage/gnucash_user_data
-docker compose up --build
-```
-
-
-
+Run `make generate_compose_env && docker compose config` to view docker compose file config.
