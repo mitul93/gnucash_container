@@ -7,8 +7,8 @@ include make/env.mk
 # generate docker compose env file for devcontainer
 DEVCONTAINER_BUILD_TIME_ENV_FILE := .env
 
-.PHONY: generate_devcontainer_env
-generate_devcontainer_env:
+.PHONY: generate_compose_env
+generate_compose_env:
 	@rm -rf $(DEVCONTAINER_BUILD_TIME_ENV_FILE)
 
 	@echo "DOCKER_BASE_IMAGE_NAME=${DOCKER_BASE_IMAGE_NAME}" >> $(DEVCONTAINER_BUILD_TIME_ENV_FILE)
@@ -20,6 +20,6 @@ generate_devcontainer_env:
 	@echo "DOCKER_USER_GID=${DOCKER_USER_GID}" >> $(DEVCONTAINER_BUILD_TIME_ENV_FILE)
 
 .PHONY: run_gnucash
-run_gnucash: generate_devcontainer_env
+run_gnucash: generate_compose_env
 	@mkdir -p storage/config storage/share storage/gnucash_user_data
 	@docker compose up --build
