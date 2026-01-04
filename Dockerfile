@@ -21,7 +21,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # add user to usergroup
-ARG USERNAME
+ARG USERNAME=gnucash
 ARG USER_UID
 ARG USER_GID
 RUN userdel -r ubuntu && groupadd --gid ${USER_GID} ${USERNAME} && \
