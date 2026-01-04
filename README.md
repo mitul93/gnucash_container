@@ -31,8 +31,9 @@ Following settings ensures persistent storage of application and user data. By d
 
 | Host Path                     | Container Path            | Type              |
 |-------------------------------|---------------------------|:-----------------:|
-| `storage/share`               | ~/.local/share/gnucash/   | Application Data  |
-| `storage/config`              | ~/.config/gnucash         | Application Data  |
+| `storage/share/gnucash/`      | ~/.local/share/gnucash/   | Application Data  |
+| `storage/config/gnucash`      | ~/.config/gnucash         | Application Data  |
+| `storage/config/dconf`        | ~/.config/dconf           | GSettings         |
 | `storage/gnucash_user_data`   | ~/gnucash_user_data       | User Data         |
 
 You can override these mappings in `docker-compose.yaml` file.

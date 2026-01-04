@@ -34,8 +34,11 @@ services:
         source: storage/gnucash_user_data/
         target: /home/${DOCKER_USERNAME}/gnucash_user_data
       - type: bind
-        source: storage/share/
+        source: storage/share/gnucash/
         target: /home/${DOCKER_USERNAME}/.local/share/gnucash/
       - type: bind
-        source: storage/config/
+        source: storage/config/gnucash
         target: /home/${DOCKER_USERNAME}/.config/gnucash
+      - type: bind
+        source: storage/config/dconf
+        target: /home/${DOCKER_USERNAME}/.config/dconf

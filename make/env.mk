@@ -17,7 +17,7 @@ GNUCASH_STORAGE_BACKEND:=SQLite
 ##### helper scripts #####
 
 # Convert comma-separated input to space-separated and uppercase
-GNUCASH_STORAGE_BACKEND_UPPER := $(shell echo $(GNUCASH_STORAGE_BACKENDS) | tr '[:lower:]' '[:upper:]' | tr ',' ' ')
+GNUCASH_STORAGE_BACKEND_UPPER := $(shell echo $(GNUCASH_STORAGE_BACKEND) | tr '[:lower:]' '[:upper:]' | tr ',' ' ')
 
 # Allowed backends
 VALID_GNUCASH_STORAGE_BACKEND := SQLITE MYSQL POSTGRESQL
@@ -39,5 +39,5 @@ $(strip $(if $(filter SQLITE,$(1)),libdbd-sqlite3,) \
        $(if $(filter POSTGRESQL,$(1)),libdbd-pgsql,))
 endef
 
-# Build GNU_CASH_STORAGE_BACKEND_APT by mapping each backend
+# Build GNU_CASH_STORAGE_BACKEND_APT_PACKAGES by mapping each backend
 GNU_CASH_STORAGE_BACKEND_APT_PACKAGES := $(strip $(foreach b,$(GNUCASH_STORAGE_BACKEND_UPPER),$(call backend_to_pkg,$b)))
