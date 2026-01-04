@@ -24,22 +24,22 @@ It is useful for isolating GnuCash from your host system, managing dependencies,
 
 ## Data Mapping / Persistent Storage
 
-> ⚠️ Use **~/gnucash_data** container directory to save GNU Cash user data.  
+> ⚠️ Use **~/gnucash_user_data** container directory to save GNU Cash user data.  
 > This ensures that all of your accounting data persists between docker runs.
 
 Following settings ensures persistent storage of application and user data. By default, GnuCash inside the container stores:
 
-| Host Path             | Container Path            | Type              |
-|-----------------------|---------------------------|:-----------------:|
-| `data/share/gnucash`  | ~/.local/share/gnucash/   | Application Data  |
-| `data/config/gnucash` | ~/.config/gnucash         | Application Data  |
-| `data/gnucash_data`   | ~/gnucash_data            | User Data         |
+| Host Path                     | Container Path            | Type              |
+|-------------------------------|---------------------------|:-----------------:|
+| `storage/share`               | ~/.local/share/gnucash/   | Application Data  |
+| `storage/config`              | ~/.config/gnucash         | Application Data  |
+| `storage/gnucash_user_data`   | ~/gnucash_user_data       | User Data         |
 
 You can override these mappings in `docker-compose.yaml` file.
 
 More information about Application Data paths available at https://wiki.gnucash.org/wiki/Configuration_Locations#System-wide
 
-The docker container will run as local user UID:GID. Make sure you have permissions to read/write `gnucash_docker/data` directory.
+The docker container will run as local user UID:GID. Make sure you have permissions to read/write `gnucash_docker/storage` directory.
 
 ## Build and run docker image
 
@@ -51,18 +51,21 @@ make run_gnucash
 OR
 
 Create .env file with following fields and save it to `gnucash_docker/.env`
+
+`DOCKER_USER_UID` and `DOCKER_USER_GID` must have permission to read/write `gnucash_docker/storage` folder.
+
 ```
 DOCKER_BASE_IMAGE_NAME=ubuntu
 DOCKER_BASE_IMAGE_TAG=24.04
 REPOSITORY_NAME=gnucash_docker
-USERNAME=
-USER_UID=
-USER_GID=
+DOCKER_USERNAME=gnucash
+DOCKER_USER_UID=
+DOCKER_USER_GID=
 ```
 
 ```
 cd gnucash_docker
-mkdir -p data/config/gnucash data/share/gnucash data/gnucash_data
+mkdir -p storage/config storage/share storage/gnucash_user_data
 docker compose up --build
 ```
 

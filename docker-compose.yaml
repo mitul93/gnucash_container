@@ -30,11 +30,11 @@ services:
         target: /tmp/.X11-unix/
         read_only: true
       - type: bind
-        source: data/gnucash_data
-        target: /home/${USERNAME}/gnucash_data
+        source: storage/gnucash_user_data/
+        target: /home/${DOCKER_USERNAME}/gnucash_user_data
       - type: bind
-        source: data/share/gnucash
-        target: /home/${USERNAME}/.local/share/gnucash/
+        source: storage/share/
+        target: /home/${DOCKER_USERNAME}/.local/share/gnucash/
       - type: bind
-        source: data/config/gnucash
-        target: /home/${USERNAME}/.config/gnucash
+        source: storage/config/
+        target: /home/${DOCKER_USERNAME}/.config/gnucash

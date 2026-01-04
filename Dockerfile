@@ -30,7 +30,7 @@ RUN userdel -r ubuntu && groupadd --gid ${USER_GID} ${USERNAME} && \
 # user name
 USER ${USERNAME}
 
-RUN mkdir ~/.config
+RUN mkdir -p ~/.config/gnucash ~/.local/share/gnucash
 
 # working directory
 ARG REPOSITORY_NAME

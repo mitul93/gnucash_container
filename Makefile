@@ -21,5 +21,5 @@ generate_devcontainer_env:
 
 .PHONY: run_gnucash
 run_gnucash: generate_devcontainer_env
-	@mkdir -p data/config/gnucash data/share/gnucash data/gnucash_data
+	@mkdir -p storage/config storage/share storage/gnucash_user_data
 	@docker compose up --build
