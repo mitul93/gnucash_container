@@ -11,7 +11,6 @@ services:
         USERNAME: ${DOCKER_USERNAME}
         USER_UID: ${DOCKER_USER_UID}
         USER_GID: ${DOCKER_USER_GID}
-        GNU_CASH_STORAGE_BACKEND_APT_PACKAGES: ${GNU_CASH_STORAGE_BACKEND_APT_PACKAGES}
     environment:
       DISPLAY: ${DISPLAY}
       # https://unix.stackexchange.com/questions/230238/x-applications-warn-couldnt-connect-to-accessibility-bus-on-stderr

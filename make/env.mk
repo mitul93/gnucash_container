@@ -38,6 +38,3 @@ $(strip $(if $(filter SQLITE,$(1)),libdbd-sqlite3,) \
        $(if $(filter MYSQL,$(1)),libdbd-mysql,) \
        $(if $(filter POSTGRESQL,$(1)),libdbd-pgsql,))
 endef
-
-# Build GNU_CASH_STORAGE_BACKEND_APT_PACKAGES by mapping each backend
-GNU_CASH_STORAGE_BACKEND_APT_PACKAGES := $(strip $(foreach b,$(GNUCASH_STORAGE_BACKEND_UPPER),$(call backend_to_pkg,$b)))
