@@ -6,7 +6,7 @@ services:
       # dockerfile is with respect to context directory
       dockerfile: "./Dockerfile"
       args:
-        DOCKER_BASE_IMAGE_NAME: ${DOCKER_BASE_IMAGE_NAME}
+        CONTAINER_BASE_IMAGE_NAME: ${CONTAINER_BASE_IMAGE_NAME}
         DOCKER_BASE_IMAGE_TAG: ${DOCKER_BASE_IMAGE_TAG}
         USERNAME: ${CONTAINER_USERNAME}
         USER_UID: ${CONTAINER_USER_UID}
