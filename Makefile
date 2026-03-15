@@ -4,7 +4,7 @@ include make/env.mk
 #################### devcontainer ####################
 ######################################################
 
-# generate docker compose env file for devcontainer
+# generate compose env file for devcontainer
 DEVCONTAINER_BUILD_TIME_ENV_FILE := .env
 
 .PHONY: generate_compose_env

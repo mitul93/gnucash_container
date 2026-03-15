@@ -1,7 +1,7 @@
 REPOSITORY_NAME:=gnucash_docker
 DOCKER_IMAGE_NAME:=gnucash_docker
 
-# docker
+# container
 CONTAINER_BASE_IMAGE_NAME:=ubuntu
 CONTAINER_BASE_IMAGE_TAG:=24.04
 
