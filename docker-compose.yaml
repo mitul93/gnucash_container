@@ -15,6 +15,7 @@ services:
       DISPLAY: ${DISPLAY}
       # https://unix.stackexchange.com/questions/230238/x-applications-warn-couldnt-connect-to-accessibility-bus-on-stderr
       NO_AT_BRIDGE: 1
+      ALSA_CONFIG_PATH: /dev/null
     user: "${DOCKER_USER_UID}:${DOCKER_USER_GID}"
     deploy:
       resources:
