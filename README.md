@@ -1,6 +1,9 @@
-# GnuCash Docker Container
+# GnuCash Container
 
-This project provides a **Docker container to run GnuCash** (GNU Accounting Software) using Ubuntu package.
+This project provides a **container to run GnuCash** (GNU Accounting Software) using Ubuntu package.
+
+>Docker may work but is not tested. This project is developed and tested with Podman
+
 
 It is useful for isolating GnuCash from your host system, managing dependencies, and running it safely in containers.
 
@@ -17,14 +20,15 @@ It is useful for isolating GnuCash from your host system, managing dependencies,
 
 ## Tested with
 
-- Docker Compose v2.40.3
+- podman Compose 1.0.6
+- podman 4.9.3
 - Make 4.3 (if want to launch program via make)
-- Host OS : Ubuntu 24.04 6.8.0-90-generic
+- Host OS : Ubuntu 24.04 6.8.0-106-generic
 - GnuCash 5.5 Build ID: 5.5+(2023-12-16)
 
 ## Data Mapping / Persistent Storage
 
-> ⚠️ Use **~/gnucash_user_data** container directory to save GNU Cash user data.  
+> Use **~/gnucash_user_data** container directory to save GNU Cash user data.  
 > This ensures that all of your accounting data persists between docker runs.
 
 Following settings ensures persistent storage of application and user data. By default, GnuCash inside the container stores:
@@ -38,30 +42,27 @@ Following settings ensures persistent storage of application and user data. By d
 
 You can override these mappings in `docker-compose.yaml` file.
 
-More information about Application Data paths available at https://wiki.gnucash.org/wiki/Configuration_Locations#System-wide
+> More information https://wiki.gnucash.org/wiki/Configuration_Locations#System-wide
 
-The docker container will run as local user UID:GID with username `gnucash` . Make sure you have permissions to read/write `gnucash_docker/storage` directory.
+The docker container will run as local user UID:GID with username `gnucash`. Make sure you have permissions to read/write `gnucash_docker/storage` directory.
 
 ## GNU Cash storage backend
 
 GNU Cash supports **XML**, **SQLite**, **MySQL** and **PostgreSQL** as storage backend. 
 
-More information https://www.gnucash.org/docs/v5/C/gnucash-guide/basics-files1.html
+> More information https://www.gnucash.org/docs/v5/C/gnucash-guide/basics-files1.html
 
-Linux requires additional package installtion to use SQL backends. This project configures GNU Cash with SQLite.
+This project configures GNU Cash with SQLite.
 
-If you want to use another storage backend, update value of `GNUCASH_STORAGE_BACKEND` variable in file `make/env.mk`
-It accepts comma separated values.
+If you want to use another storage backend, update [Dockerfile](Dockerfile) apt package install section.
 
 Example values
 ```
-GNUCASH_STORAGE_BACKEND:=SQLite
-GNUCASH_STORAGE_BACKEND:=SQLite, MySQL
-GNUCASH_STORAGE_BACKEND:=MySQL, PostgreSQL, SQLite
+libdbd-sqlite3
+libdbd-mysql
+libdbd-pgsql
 ```
-
-
-## Build and run docker image
+## Build and run container
 
 ```
 cd gnucash_docker
@@ -70,6 +71,8 @@ make run_gnucash
 
 ## Troubleshooting
 
-Remove `.evn` file and run `make run_gnucash`
+### Inconsistency in container run
+- Remove `.evn` file and run `make run_gnucash`
 
-Run `make generate_compose_env && docker compose config` to view docker compose file config.
+### Mount folder ownership problem
+- Change ownership of `storage` folder to UID/GID of podman container user
