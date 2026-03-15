@@ -12,13 +12,14 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
-ARG GNU_CASH_STORAGE_BACKEND_APT_PACKAGES
 # install apt packages and dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends tzdata \
     # gnucash
     libcanberra-gtk3-module dbus-x11 librsvg2-common gir1.2-gtk-3.0 python3-gi \ 
-    ${GNU_CASH_STORAGE_BACKEND_APT_PACKAGES} \
+    libdbd-sqlite3 \ 
+    # libdbd-mysql \
+    # libdbd-pgsql \
     gnucash python3-gnucash && \
     rm -rf /var/lib/apt/lists/*
 
