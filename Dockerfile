@@ -36,7 +36,7 @@ USER ${USERNAME}
 RUN mkdir -p ~/.config/gnucash ~/.local/share/gnucash
 
 # working directory
-ARG REPOSITORY_NAME
+ARG REPOSITORY_NAME=gnucash_docker
 WORKDIR /${REPOSITORY_NAME}
 
 # entry point
