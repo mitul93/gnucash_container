@@ -7,7 +7,7 @@ DOCKER_BASE_IMAGE_TAG:=24.04
 
 CONTAINER_USERNAME=gnucash
 CONTAINER_USER_UID=$(shell id -u)
-DOCKER_USER_GID=$(shell id -g)
+CONTAINER_USER_GID=$(shell id -g)
 
 # GNU Cash storage backend. Valid values - SQLite, MySQL, PostgreSQL
 # You can write multiple values separated by comma eg. SQLite,PostGreSQL
