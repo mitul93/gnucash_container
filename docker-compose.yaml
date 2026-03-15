@@ -16,6 +16,7 @@ services:
       # https://unix.stackexchange.com/questions/230238/x-applications-warn-couldnt-connect-to-accessibility-bus-on-stderr
       NO_AT_BRIDGE: 1
       ALSA_CONFIG_PATH: /dev/null
+      XAUTHORITY: /tmp/.xauth
     user: "${DOCKER_USER_UID}:${DOCKER_USER_GID}"
     userns_mode: "keep-id:uid=${DOCKER_USER_UID},gid=${DOCKER_USER_GID}"
     deploy:
@@ -27,6 +28,10 @@ services:
           cpus: 4
           memory: 4g
     volumes:
+      # - type: bind
+      #   source: ${XAUTHORITY}
+      #   target: /tmp/.xauth
+      #   read_only: true
       - type: bind
         source: /tmp/.X11-unix/
         target: /tmp/.X11-unix/

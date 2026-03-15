@@ -6,6 +6,7 @@ include make/env.mk
 
 # generate docker compose env file for devcontainer
 DEVCONTAINER_BUILD_TIME_ENV_FILE := .env
+XAUTH := /tmp/.podman.gnucash.xauth
 
 .PHONY: generate_compose_env
 generate_compose_env:
@@ -19,7 +20,13 @@ generate_compose_env:
 	@echo "DOCKER_USER_UID=${DOCKER_USER_UID}" >> $(DEVCONTAINER_BUILD_TIME_ENV_FILE)
 	@echo "DOCKER_USER_GID=${DOCKER_USER_GID}" >> $(DEVCONTAINER_BUILD_TIME_ENV_FILE)
 
+.PHONY: generate_xauth
+generate_xauth:
+	touch $(XAUTH)
+	chmod 644 $(XAUTH)
+	xauth nlist $(DISPLAY) | sed -e 's/^..../ffff/' | xauth -f $(XAUTH) nmerge -
+
 .PHONY: run_gnucash
-run_gnucash: generate_compose_env
+run_gnucash: generate_compose_env 
 	@mkdir -p storage/config/dconf storage/config/gnucash storage/share/gnucash storage/gnucash_user_data
-	@podman-compose up
+	@XAUTHORITY=$(XAUTH) podman-compose up
