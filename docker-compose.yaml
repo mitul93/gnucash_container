@@ -8,7 +8,7 @@ services:
       args:
         DOCKER_BASE_IMAGE_NAME: ${DOCKER_BASE_IMAGE_NAME}
         DOCKER_BASE_IMAGE_TAG: ${DOCKER_BASE_IMAGE_TAG}
-        USERNAME: ${DOCKER_USERNAME}
+        USERNAME: ${CONTAINER_USERNAME}
         USER_UID: ${DOCKER_USER_UID}
         USER_GID: ${DOCKER_USER_GID}
     environment:
@@ -33,13 +33,13 @@ services:
         read_only: true
       - type: bind
         source: ./storage/gnucash_user_data/
-        target: /home/${DOCKER_USERNAME}/gnucash_user_data
+        target: /home/${CONTAINER_USERNAME}/gnucash_user_data
       - type: bind
         source: ./storage/share/gnucash/
-        target: /home/${DOCKER_USERNAME}/.local/share/gnucash/
+        target: /home/${CONTAINER_USERNAME}/.local/share/gnucash/
       - type: bind
         source: ./storage/config/gnucash
-        target: /home/${DOCKER_USERNAME}/.config/gnucash
+        target: /home/${CONTAINER_USERNAME}/.config/gnucash
       - type: bind
         source: ./storage/config/dconf
-        target: /home/${DOCKER_USERNAME}/.config/dconf
+        target: /home/${CONTAINER_USERNAME}/.config/dconf
