@@ -1,5 +1,5 @@
-REPOSITORY_NAME:=gnucash_docker
-DOCKER_IMAGE_NAME:=gnucash_docker
+REPOSITORY_NAME:=gnucash_container
+DOCKER_IMAGE_NAME:=gnucash_container
 
 # container
 CONTAINER_BASE_IMAGE_NAME:=ubuntu
