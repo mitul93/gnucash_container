@@ -22,4 +22,4 @@ generate_compose_env:
 .PHONY: run_gnucash
 run_gnucash: generate_compose_env
 	@mkdir -p storage/config/dconf storage/config/gnucash storage/share/gnucash storage/gnucash_user_data
-	@docker compose up --build
+	@podman-compose up
