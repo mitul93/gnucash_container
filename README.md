@@ -44,7 +44,7 @@ You can override these mappings in `docker-compose.yaml` file.
 
 > More information https://wiki.gnucash.org/wiki/Configuration_Locations#System-wide
 
-The container will run as local user UID:GID with username `gnucash`. Make sure you have permissions to read/write `gnucash_docker/storage` directory.
+The container will run as local user UID:GID with username `gnucash`. Make sure you have permissions to read/write `gnucash_container/storage` directory.
 
 ## GNU Cash storage backend
 
@@ -65,7 +65,7 @@ libdbd-pgsql
 ## Build and run container
 
 ```
-cd gnucash_docker
+cd gnucash_container
 make run_gnucash
 ```
 
