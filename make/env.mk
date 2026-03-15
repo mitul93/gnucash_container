@@ -6,7 +6,7 @@ DOCKER_BASE_IMAGE_NAME:=ubuntu
 DOCKER_BASE_IMAGE_TAG:=24.04
 
 CONTAINER_USERNAME=gnucash
-DOCKER_USER_UID=$(shell id -u)
+CONTAINER_USER_UID=$(shell id -u)
 DOCKER_USER_GID=$(shell id -g)
 
 # GNU Cash storage backend. Valid values - SQLite, MySQL, PostgreSQL
