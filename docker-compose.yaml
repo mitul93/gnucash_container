@@ -17,6 +17,7 @@ services:
       NO_AT_BRIDGE: 1
       ALSA_CONFIG_PATH: /dev/null
     user: "${DOCKER_USER_UID}:${DOCKER_USER_GID}"
+    userns_mode: "keep-id:uid=${DOCKER_USER_UID},gid=${DOCKER_USER_GID}"
     deploy:
       resources:
         limits:
